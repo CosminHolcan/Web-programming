@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<head>
+	<title>Browse books</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+<script src="browse.js"></script>
+<style type="text/css">
+body{
+        background-image: url("books_image.jpg");
+    }
+
+    p{
+        font-size: large;
+    }
+
+    h1{
+        text-align: center;
+        font-size: 75px;
+        color: rgb(55, 55, 243);
+    }
+
+    .submit{
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 15%;
+        margin-bottom: 10px;
+    }
+
+  #dataTable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#dataTable td, #dataTable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#dataTable tr {background-color: #f2f2f2;}
+
+#dataTable tr:hover {background-color: #ddd;}
+
+#dataTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #060746;
+  color: white;
+}
+  label{
+        font-size: larger;
+    }
+
+    div.settings {
+    display:grid;
+    grid-template-columns: max-content max-content;
+    grid-gap:5px;
+}
+
+</style>
+</head>
+<body>
+  <h1>Book library</h1>
+      <div class="container">
+        <p>Find books</p>
+        <div class="settings">
+            <label>Author</label>
+			<input type="text" id="author" name="author">
+            <label>Genre</label>
+			<input type="text" id="genre" name="genre">
+        </div>
+        <input type="submit" class="submit" value="Find" id="submitButton">
+      </div>
+
+<table id="dataTable">  
+  <tr>  
+    <th>Author</th>  
+    <th>Title</th>  
+    <th>Pages</th>  
+    <th>Genre</th>  
+    <th>Lended</th>  
+  </tr>   
+  <tbody id="tbodyTable">
+  </tbody>
+</table>
+</body>
+</html>
+

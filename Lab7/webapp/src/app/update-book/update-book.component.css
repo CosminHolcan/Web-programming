@@ -1,0 +1,36 @@
+label{
+  font-size: larger;
+}
+
+div.settings {
+  display:grid;
+  grid-template-columns: max-content max-content;
+  grid-gap:5px;
+}
+
+.container{
+  position: absolute;
+  top: 48%;
+  left: 42%;
+  margin-top: -20px;
+  margin-left: -50px;
+  width: 280px;
+  height: 230px;
+  background-color: darkcyan;
+}
+
+p{
+  font-size: large;
+}
+
+.submit{
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+h1{
+  text-align: center;
+  font-size: 100px;
+  color: rgb(55, 55, 243);
+}

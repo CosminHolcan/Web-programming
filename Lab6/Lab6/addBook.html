@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<head>
+	<title>Add book</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+<script type="text/javascript">
+    $(document).ready(function () {
+       $('#submitButton').click(function () {
+           var author = $("#author").val();
+           var title = $("#title").val();
+           var pages = $("#pages").val();
+           var genre = $("#genre").val();
+
+           if (author != '' && title != '' && pages != '' && genre != '')
+           {
+               $.ajax({
+                   url: "add-book.php",
+                   type: "POST",
+                   data: { author:author, title:title, pages:pages, genre:genre},
+                   success:function (result) {
+                      window.location.href = "addBook.html";
+                      alert(result);
+                   }
+               })
+           }
+           else{
+               alert("Complete the required fields!");
+           }
+       });
+    });
+</script>
+
+<style type="text/css">
+
+    body{
+        background-image: url("books_image.jpg");
+    }
+
+    label{
+        font-size: larger;
+    }
+
+    div.settings {
+    display:grid;
+    grid-template-columns: max-content max-content;
+    grid-gap:5px;
+}
+
+    .container{
+    position: absolute;
+    top: 42%;
+    left: 42%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 280px;
+    height: 230px;
+    background-color: darkcyan;
+    }
+
+    p{
+        font-size: large;
+    }
+
+    .submit{
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+    h1{
+        text-align: center;
+        font-size: 100px;
+        color: rgb(55, 55, 243);
+    }
+
+</style>
+</head>
+<body>
+    <h1>Book library</h1>
+    <div class="container">
+		<p>Add new book</p>
+        <div class="settings">
+            <label>Author</label>
+			<input type="text" id="author" name="author">
+            <label>Title</label>
+			<input type="text" id="title" name="title">
+            <label>Pages</label>
+			<input type="text" id="pages" name="pages">
+            <label>Genre</label>
+			<input type="text" id="genre" name="genre">
+        </div>
+      <input type="submit" class="submit" value="Add" id="submitButton">
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<head>
+	<title>Delete book</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+<script type="text/javascript">
+    $(document).ready(function () {
+       $('#submitButton').click(function () {
+           var author = $("#author").val();
+           var title = $("#title").val();
+
+           if (author != '' && title != '')
+           {
+               $.ajax({
+                   url: "delete-book.php",
+                   type: "POST",
+                   data: { author:author, title:title},
+                   success:function (result) {
+                      window.location.href = "deleteBook.html";
+                      alert(result);
+                   }
+               })
+           }
+           else{
+               alert("Complete the required fields!");
+           }
+       });
+    });
+</script>
+
+<style type="text/css">
+
+    body{
+        background-image: url("books_image.jpg");
+    }
+
+    label{
+        font-size: larger;
+    }
+
+    h1{
+        text-align: center;
+        font-size: 100px;
+        color: rgb(55, 55, 243);
+    }
+
+    div.settings {
+    display:grid;
+    grid-template-columns: max-content max-content;
+    grid-gap:5px;
+}
+
+    .container{
+    position: absolute;
+    top: 42%;
+    left: 42%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 280px;
+    height: 170px;
+    background-color: darkcyan;
+    }
+
+    p{
+        font-size: large;
+    }
+
+    .submit{
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+</style>
+</head>
+<body>
+    <h1>Book library</h1>
+    <div class="container">
+        <p>Delete book</p>
+        <div class="settings">
+            <label>Author</label>
+			<input type="text" id="author" name="author">
+            <label>Title</label>
+			<input type="text" id="title" name="title">
+        </div>
+        <input type="submit" class="submit" value="Delete" id="submitButton">
+      </div>
+</body>
+</html>
+

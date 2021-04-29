@@ -1,0 +1,15 @@
+<div class="container">
+  <p>Add new book</p>
+  <div class="settings">
+    <label>Author</label>
+    <input type="text" #author>
+    <label>Title</label>
+    <input type="text" #title>
+    <label>Pages</label>
+    <input type="text" #pages>
+    <label>Genre</label>
+    <input type="text" #genre>
+  </div>
+  <input type="submit" class="submit" value="Add" id="submitButton" (click)="addBook(author.value, title.value, pages.value, genre.value)">
+</div>
+

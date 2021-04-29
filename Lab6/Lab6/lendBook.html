@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<head>
+	<title>Lend book</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+<script type="text/javascript">
+    $(document).ready(function () {
+       $('#submitButton').click(function () {
+           var author = $("#author").val();
+           var title = $("#title").val();
+
+           if (author != '' && title != '')
+           {
+               $.ajax({
+                   url: "lend-book.php",
+                   type: "POST",
+                   data: { author:author, title:title},
+                   success:function (result) {
+                      window.location.href = "lendBook.html";
+                      alert(result);
+                   }
+               })
+           }
+           else{
+               alert("Complete the required fields!");
+           }
+       });
+       $('#submitButton2').click(function () {
+           var author = $("#author").val();
+           var title = $("#title").val();
+
+           if (author != '' && title != '')
+           {
+               $.ajax({
+                   url: "return-book.php",
+                   type: "POST",
+                   data: { author:author, title:title},
+                   success:function (result) {
+                      window.location.href = "lendBook.html";
+                      alert(result);
+                   }
+               })
+           }
+           else{
+               alert("Complete the required fields!");
+           }
+       });
+    });
+</script>
+
+<style type="text/css">
+
+    body{
+        background-image: url("books_image.jpg");
+    }
+
+    h1{
+        text-align: center;
+        font-size: 100px;
+        color: rgb(55, 55, 243);
+    }
+
+    label{
+        font-size: larger;
+    }
+
+    div.settings {
+    display:grid;
+    grid-template-columns: max-content max-content;
+    grid-gap:5px;
+}
+
+    .container{
+    position: absolute;
+    top: 42%;
+    left: 42%;
+    margin-top: -50px;
+    margin-left: -50px;
+    width: 280px;
+    height: 190px;
+    background-color: darkcyan;
+    }
+
+    p{
+        font-size: large;
+    }
+
+    .submit{
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+    }
+
+</style>
+</head>
+<body>
+    <h1>Book library</h1>
+    <div class="container">
+        <p>Lend book</p>
+        <div class="settings">
+            <label>Author</label>
+			<input type="text" id="author" name="author">
+            <label>Title</label>
+			<input type="text" id="title" name="title">
+        </div>
+        <input type="submit" class="submit" value="Lend" id="submitButton">
+        <input type="submit" class="submit" value="Return" id="submitButton2">
+      </div>
+</body>
+</html>
+

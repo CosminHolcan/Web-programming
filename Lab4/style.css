@@ -1,0 +1,72 @@
+*{
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  box-sizing: border-box;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+
+}
+
+.sidebar {
+  position: fixed;
+  width: 250px;
+  height: 100%;
+  left: 0;
+  background : #04104B;
+  overflow-y: scroll !important;
+}
+
+.text {
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 65px;
+  text-align: center;
+  background : #27074F;
+  letter-spacing: 1px;
+}
+
+.navigation_list {
+  background-color: #04104B;
+  height: 100%;
+  width: 100%;
+  list-style: none;
+}
+
+.nav_elem {
+  line-height: 50px;
+  border-bottom: 1px solid gray;
+  padding-left: 40px;
+}
+
+.nav_elem_ref{
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  font-size: 17px;
+}
+
+.nav_elem_ref:hover, .sub_menu_ref:hover {
+  color: #AF19B1;
+}
+
+.sub_menu {
+  list-style: none;
+}
+
+.sub_menu_elem {
+  line-height: 35px;
+  padding-left: 40px;
+}
+
+.sub_menu_ref {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  font-size: 15px;
+}
+
+
+#menuGodfather, #menuGoodfellas, #menuForrestGump, #menuPrestige, #menuDjango {
+  display: none;
+}

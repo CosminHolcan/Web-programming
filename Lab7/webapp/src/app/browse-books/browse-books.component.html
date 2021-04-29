@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="settings">
+    <label>Author</label>
+    <input type="text" #author>
+    <label>Genre</label>
+    <input type="text" #genre>
+  </div>
+  <input id ="findButton" type="submit" class="submit" value="Find" (click)="refresh(author.value, genre.value)">
+</div>
+
+<table id="dataTable">
+  <tr>
+    <th>Author</th>
+    <th>Title</th>
+    <th>Pages</th>
+    <th>Genre</th>
+    <th>Lended</th>
+    <th>Action</th>
+  </tr>
+  <tr *ngFor="let book of books">
+    <td>{{book.author}}</td>
+    <td>{{book.title}}</td>
+    <td>{{book.pages}}</td>
+    <td>{{book.genre}}</td>
+    <td>{{book.lended}}</td>
+    <td>
+      <button id="deleteButton" (click)="deleteBook(book.author, book.title)">Delete</button>
+      <button id="lend/returnButton" (click)="lendBook(book.author, book.title, book.lended)">Lend/Return</button>
+    </td>
+  </tr>
+</table>
+
+
