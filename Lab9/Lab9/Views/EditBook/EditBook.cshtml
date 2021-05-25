@@ -1,0 +1,180 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<head>
+    <title>Add book</title>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+
+    <script type="text/javascript">
+
+        function populateDetails() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const id = urlParams.get('id');
+            console.log(id);
+            $.getJSON(
+                "/EditBook/GetOneBook",
+                { id : id },
+                function (data, status) {
+                    console.log(data);
+                    let book = data["book"];
+                    $("#author").val(book.author);
+                    $("#author").attr('readonly', true);
+                    $("#title").val(book.title);
+                    $("#title").attr('readonly', true);
+                    $("#pages").val(book.pages);
+                    $("#genre").val(book.genre);
+                    $("#lendedSelect").val(book.lended);
+                    
+                }
+            )
+        }
+
+        function updateBook() {
+            if (confirm("Are you sure you want to update this book ?")) {
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                const id = urlParams.get('id');
+                var pages = $("#pages").val();
+                var genre = $("#genre").val();
+                var lended = $("#lendedSelect").val();
+
+                if (pages != '' && genre != '' && lended != '') {
+
+                    if (/^\+?(0|[1-9]\d*)$/.test(pages)) {
+                        $.ajax({
+                            url: "/EditBook/UpdateBook",
+                            type: "POST",
+                            data: { id: id, pages: pages, genre: genre, lended: lended },
+                            success: function (result) {
+                                location.href = '/Browse';
+                                alert(result);
+                            }
+                        })
+                    }
+                    else {
+                        alert("Pages should be a positive number");
+                        populateDetails();
+                    }
+                }
+                else {
+                    alert("Lended can either be YES or NO");
+                    populateDetails();
+                }
+            }
+                else {
+                    alert("Complete the required fields!");
+                }
+        }
+
+        function deleteBook() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const id = urlParams.get('id');
+            console.log(id);
+            if (confirm("Are you sure you want to delete this book ?")) {
+                $.ajax({
+                    url: "/EditBook/DeleteBook",
+                    type: "POST",
+                    data: { id: id },
+                    success: function (result) {
+                        location.href = '/Browse';
+                        alert(result);
+                    }
+                })
+            }
+            else {
+                populateDetails();
+            }
+        }
+
+        $(document).ready(function () {
+            try {
+                if (JSON.parse(sessionStorage["currentUser"]) !== null) {
+                    populateDetails();
+                    $('#deleteButton').click(deleteBook);
+                    $('#submitButton').click(updateBook);
+                }
+                else {
+                    location.href = "/Login";
+                }
+            }
+            catch (err) {
+                location.href = "/Login";
+            }
+    });
+    </script>
+
+    <style type="text/css">
+
+        body {
+            background-image: url("../../books_image.jpg");
+        }
+
+        label {
+            font-size: larger;
+        }
+
+        div.settings {
+            display: grid;
+            grid-template-columns: max-content max-content;
+            grid-gap: 5px;
+        }
+
+        .container {
+            position: absolute;
+            top: 42%;
+            left: 42%;
+            margin-top: -50px;
+            margin-left: -50px;
+            width: 280px;
+            height: 230px;
+            background-color: darkcyan;
+        }
+
+        p {
+            font-size: large;
+        }
+
+        .submit {
+            margin-top: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 100px;
+            color: rgb(55, 55, 243);
+        }
+    </style>
+</head>
+<body>
+    <h1>Book library</h1>
+    <div class="container">
+        <p>Add new book</p>
+        <div class="settings">
+            <label>Author</label>
+            <input type="text" id="author" name="author">
+            <label>Title</label>
+            <input type="text" id="title" name="title">
+            <label>Pages</label>
+            <input type="text" id="pages" name="pages">
+            <label>Genre</label>
+            <input type="text" id="genre" name="genre">
+            <label>Lended</label>
+            <select id="lendedSelect" >
+                <option value="YES">YES</option>
+                <option value="NO">NO</option>
+            </select>
+        </div>
+        <input type="submit" class="submit" value="Update" id="submitButton">
+        <input type="submit" class="submit" value="Delete" id="deleteButton">
+    </div>
+</body>
+</html>
+

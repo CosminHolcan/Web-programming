@@ -1,0 +1,88 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>ViewLogin</title>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <script language="javascript">
+        $(document).ready(function () {
+            sessionStorage.setItem("currentUser", null);
+            $("#login-button").click(function () {
+                if ($('#user').val().length && $('#password').val().length ) {
+                    $.post(
+                        "/Login/Login",
+                        {
+                            username: $('#user').val(),
+                            password: $('#password').val()
+                        },
+                        function (data, success) {
+                            console.log(data);
+                            if (data["success"] === true) {
+                                var temp = { username: $('#user').val() };
+                                sessionStorage.setItem("currentUser", JSON.stringify( temp ));
+                                console.log(JSON.parse(sessionStorage["currentUser"]));
+                                location.href = '/Browse';
+                            } else {
+                                alert("Bad credentials");
+                            }
+                        }
+                    );
+                } else {
+                    alert("Both fields should be non-empty!")
+                }
+            });
+        });
+    </script>
+     <style type="text/css">
+         body {
+             background-image: url("../../books_image.jpg");
+         }
+         label {
+             font-size: larger;
+             color: lawngreen;
+             font-size: 25px;
+         }
+
+         div.settings {
+             display: grid;
+             grid-template-columns: max-content max-content;
+             grid-gap: 5px;
+             margin-left : 100px;
+         }
+         h1 {
+             text-align: center;
+             font-size: 100px;
+             color: rgb(55, 55, 243);
+         }
+
+         .submit {
+             margin-top: 10px;
+             margin-left: 100px;
+             margin-right: auto;
+             width: 270px;
+         }
+         h3 {
+             margin-left: 100px;
+             font-size: 50px;
+             color: lawngreen;
+         }
+     </style>
+</head>
+<body>
+    <h1>Book library</h1>
+    <h3>Login</h3>
+    <div class="settings">
+        <label for="user">Username</label>
+        <input type="text" id="user" name="user">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password">
+    </div>
+    <input type="submit" class="submit" value="Login" id="login-button">
+</body>
+</html>
+
